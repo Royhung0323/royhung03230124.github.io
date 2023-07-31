@@ -1,0 +1,154 @@
+.header
+{
+    background-color:dodgerblue;
+    height: 100px;
+}
+
+.about
+{
+    display: flex;
+    height: 20px;
+    padding: 5px;
+    color:white;
+    justify-content: flex-end;
+}
+
+.about .aboutLeft
+{
+    display: flex;
+    margin-right: auto;
+}
+
+.about .aboutLeft div
+{
+    height: 20px;
+    line-height: 20px;
+    border-right-style: solid;
+    padding-right: 5px;
+    margin-right: 5px;
+    border-width: 1px;
+    cursor: pointer;
+}
+
+.about .aboutRight
+{
+    display: flex;
+}
+
+.about .aboutRight div
+{
+    height: 20px;
+    line-height: 20px;
+    padding-right: 5px;
+    margin-right: 5px;
+    border-right-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+}
+
+.search
+{
+    display: flex;
+    height: 80px;
+    padding: 5px;
+    color:white;
+}
+
+.searchLeft
+{
+    line-height: 80px;
+    margin-right: 40px;
+}
+
+.searchRight
+{
+   width: 900px;
+   padding-top: 15px;
+}
+
+.field
+{
+    width: 180px;
+    padding: 20px;
+}
+
+.inputbox
+{
+    width: 280px;
+    background-color: rgb(240, 240, 240);
+    padding: 20px;
+}
+
+.section3
+{
+    height: auto;
+    background-color: rgb(240, 240, 240);
+}
+
+.ProductBoxList
+{
+    display: flex; /* 水平布局 */
+    flex-wrap: wrap;    
+    align-content: flex-start;
+}
+
+.ProductBox
+{
+    width: 200px;
+    height: 290px;
+    padding: 20px;
+}
+
+.ProductSrc
+{
+    height: 160px;
+    background-color: white;
+}
+
+.ProductName
+{
+    height: 20px;
+    margin-top: 10px;
+}
+
+.clickbox
+{
+    display: flex;
+    border: solid;
+    border-width: 1px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.click1
+{
+    width: 100px;
+    text-align: center;
+    border-right-style: solid;
+    border-width: 1px;
+}
+
+.click2
+{
+    width: 100px;
+    text-align: center;
+}
+
+.click3
+{
+    width: 200px;
+    text-align: center;
+}
+
+.ProductDEL
+{
+    height: 20px;
+    text-align: center;
+    font-weight:bold;
+    background-color:rgb(230, 30, 30);
+}
+
+.ProductDEL:hover
+{
+    cursor: pointer;
+}

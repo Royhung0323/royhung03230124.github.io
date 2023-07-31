@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="main.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" 
+            integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/0ec2d0a003.js" crossorigin="anonymous"></script>
+        <title>線上商城</title>
+    </head>
+
+    <body>
+        <div id = "app">
+            <div class = "header">
+                <div class = "container">
+                    <div class = "about">
+                        <div class = "aboutLeft">
+                            <div @click = "GoTo1">商品列表</div>
+                            <div @click = "GoTo2">收藏</div>                           
+                            <div style = "border-width: 0px;">
+                                關於我們 
+                                <i class="fa-brands fa-facebook" style="color: #fafafa; padding-right: 5px;"></i>
+                                <i class="fa-brands fa-instagram fa-lg" style="color: #fafafa; padding-right: 6px;"></i>
+                                <i class="fa-brands fa-line" style="color: #fafafa;"></i>
+                            </div>
+                        </div>
+                        <div class = "aboutRight">
+                            <div>註冊</div>
+                            <div style = "border-width: 0px;">登入</div>
+                        </div>
+                    </div>
+                    <div class = "search">
+                        <div class = "searchLeft" style = "font-size:30px; cursor: pointer;" @click = "GoTo1">
+                            <i class="fa-solid fa-cart-shopping">線上商城</i>
+                        </div>
+                        <div class = "searchRight">
+                            <div class="input-group mb-3 searchbox">
+                                <input type="text" class="form-control" placeholder="搜尋" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                <button class="btn btn-outline-secondary" type="button" id="button-addon2" style = "border-style: solid; border-width: 1px; border-color: white;"><i class="fa-solid fa-magnifying-glass" style="color: #fafafa;"></i></button><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section class = "section2">
+                <div class = "container">
+                    <div class = "field" v-show = "showItem === 1">
+                        <div class = "inputbox">
+                            <h3 style = "text-align: center;">加入樣品</h3>
+                            樣品名稱: <input type="text" v-model = "ProductID"><br>
+                            樣品圖片: <input type="file" name="mypic" id="mypic" accept=".png,.jpg,.gif"><br><br>
+                            <input type="button" value = "加入" @click = "JoinList">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class = "section3">
+                <div class = "container">
+                    <div v-show = "ProductList.length && (showItem === 1)">
+                        <h2 style = "padding-left: 20px;">商品列表</h2>
+                        <div class = "ProductBoxList" >
+                            <div v-for = "(product,index) in ProductList">
+                                <div class = "ProductBox">
+                                    <div class = "ProductSrc">
+                                        <img v-bind:src = "product.src" width = "160px" height = "160px">
+                                    </div>
+                                    <div class = "ProductName">
+                                        {{ product.name }}(編號: {{ index + 1 }})
+                                    </div>
+                                    <div class = "clickbox">
+                                        <div class = "click1" @click = "addCollect(index)" style = "cursor: pointer;">收藏</div>
+                                        <div class = "click2" style = "cursor: pointer;">購買</div>
+                                    </div>                     
+                                    <div class = "ProductDEL" @click = "removeProduct(index)">
+                                        X
+                                    </div>   
+                                </div>                          
+                            </div>
+                        </div>
+                        <hr>
+                        <p>
+                            Total : {{ ProductList.length }} 個產品
+                            <button @click = "ClearAll">刪除全部</button>
+                        </p> 
+                    </div>
+
+                    <div v-show = "CollectList.length && (showItem === 2)">
+                        <h2 style = "padding-left: 20px;">收藏列表</h2>
+                        <div class = "ProductBoxList" >
+                            <div v-for = "(Collect,index) in CollectList">
+                                <div class = "ProductBox">
+                                    <div class = "ProductSrc">
+                                        <img v-bind:src = "Collect.CollectSrc" width = "160px" height = "160px">
+                                    </div>
+                                    <div class = "ProductName">
+                                        {{ Collect.CollectName }}(編號: {{ index + 1 }})
+                                    </div>
+                                    <div class = "clickbox">
+                                        <div class = "click3" style = "cursor: pointer;">購買</div>
+                                    </div>                               
+                                    <div class = "ProductDEL" @click = "removeCollect(index)">
+                                        X
+                                    </div>                   
+                                </div>                          
+                            </div>
+                        </div>
+                        <hr>
+                        <p>
+                            Total : {{ CollectList.length }} 個收藏
+                            <button @click = "ClearCollectList">刪除全部</button>
+                        </p> 
+                    </div>
+                    <div v-show = "!ProductList.length && (showItem === 1)">
+                        <h1 style = "font-size: 100px; text-align: center;">沒有產品</h1>
+                    </div>
+                    <div v-show = "!CollectList.length && (showItem === 2)">
+                        <h1 style = "font-size: 100px; text-align: center;">沒有收藏</h1>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </body>
+
+    <script src="main.js"></script>
+
+</html>
